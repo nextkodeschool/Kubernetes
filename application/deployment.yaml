@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wavecafe-deployment
+
+spec:
+  # Number of Pod replicas
+  replicas: 2
+
+  # Deployment manages Pods with this label
+  selector:
+    matchLabels:
+      app: wavecafe
+
+  # Pod template
+  template:
+    metadata:
+      labels:
+        app: wavecafe
+
+    spec:
+      containers:
+        - name: wavecafe
+
+          # Docker Hub image
+          image: nextkodeschool/wavecafe:latest
+
+          # Always pull the latest image
+          imagePullPolicy: Always
+
+          ports:
+            # Application/Apache is running on port 80
+            - containerPort: 80
